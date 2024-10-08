@@ -68,7 +68,12 @@ AI-SDR stands for Artificial Intelligence Sales Development Representative. This
 
     Right Now this is not started
 
-6. **Demo**
+6. **Password Protection:**
+
+    yet No password hashing or any other technique to safeguard the password is being used.
+
+
+### 5. **Demo**
 
 ![screen-capture2-ezgif com-speed](https://github.com/user-attachments/assets/e27dc1ea-364c-48b1-bf61-ba41affe3172)
 
