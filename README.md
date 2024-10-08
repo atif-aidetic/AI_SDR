@@ -38,7 +38,8 @@ AI-SDR stands for Artificial Intelligence Sales Development Representative. This
 
 ### 3. Process Flow Diagram
 
-1. 
+![image](https://github.com/user-attachments/assets/a1a67d13-1d5a-4af4-ba84-4cad8148e8fb)
+
 
 ### 4. Scope of Improvement
 
@@ -67,7 +68,10 @@ AI-SDR stands for Artificial Intelligence Sales Development Representative. This
 
     Right Now this is not started
 
-              
+6. **Demo**
+
+![screen-capture2-ezgif com-speed](https://github.com/user-attachments/assets/e27dc1ea-364c-48b1-bf61-ba41affe3172)
+
 
 ## Notes
 
