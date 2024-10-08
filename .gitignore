@@ -1,0 +1,19 @@
+# ignore ALL .log files
+*.log
+
+# ignore ALL directories named temp, anywhere in the project
+temp/
+**/temp/
+
+# ignore ALL .ipynb files in ANY directory named temp
+temp/*.ipynb
+**/temp/*.ipynb
+
+# ignore .env file
+.env
+
+# ignore any file that has 'test' in its name, with any extension
+*test*
+
+# If you want to exclude directories that have 'test' in their name:
+**/test/

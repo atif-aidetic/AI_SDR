@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LeadGen - Aidetic</title>
+    <!-- Include Bootstrap CSS (you may need to adjust the path to your Bootstrap CSS file) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #121C37; /* Dark blue background */
+            color: #fff;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .container {
+            background-color: #1B2A4E; /* Lighter blue container background */
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 50px;
+        }
+        .sample-text {
+            color: #fff; 
+            background-color: #1B2A4E; 
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 10px;
+            height: 50px; 
+            border: 3px  solid #fff;
+            cursor: pointer;
+        }
+        .sample-text:hover {
+            color: #fff;
+            transform: scale(1.01); 
+        }
+        .sample-text a {
+            color: #fff; /* Set text color to white */
+            text-decoration: none; /* Remove underline if needed */
+        }
+        .small-button {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">LeadGen - Aidetic</h1>
+        <div class="row">
+            <div class="col-md-10">
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="form-group mb-2">
+                        <label for="query">Query:</label>
+                        <input type="text" class="form-control" id="query" name="query" required placeholder="Type your query">
+                    </div>
+                    <p class="mb-2  mt-4">Example queries:</p>
+                    <div class="sample-text" onclick="fillQuery('Give me CLM and legaltech companies in USA with employees between 50 & 500')">
+                        <p>Give me CLM and legaltech companies in USA with employees between 50 & 500.</p>
+                    </div>
+                    <div class="sample-text" onclick="fillQuery('Give me influencer marketing companies in Canada and USA with employees less than 200')">
+                        <p>Give me influencer marketing companies in Canada and USA with employees less than 200.</p>
+                    </div>
+                    <div class="sample-text" onclick="fillQuery('Give me real estate companies in USA with employees in the range of 50-200')">
+                        <p>Give me real estate companies in USA with employees in the range of 50-200.</p>
+                    </div>
+
+                    <p class="mt-4 mb-2">Designations:</p>
+
+                    <div class="btn-group" role="group" aria-label="Slap Toggle">
+                        <button type="button" class="btn btn-secondary" onclick="toggleSingleField()">CEO-CTOs</button>
+                        <button type="button" class="btn btn-secondary" onclick="toggleDoubleField()">Seniority-Function</button>
+                    </div>
+
+                    <!-- Additional query fields (initially hidden) -->
+                    <div class="form-group mt-4" id="additionalFields" style="display: none;">
+                        <!-- Single additional field -->
+                        <div id="additionalQuery1Container"></div>
+                        <!-- Two additional fields -->
+                        <div class="row" id="additionalQuery2Container"></div>
+                    </div>
+
+                    <!-- Email field -->
+                    <div class="form-group mt-4">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary small-button mt-3">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+        function fillQuery(text) {
+            document.getElementById("query").value = text;
+        }
+    </script>
+    <script>
+        function toggleSingleField() {
+            var additionalFields = document.getElementById('additionalFields');
+            additionalFields.style.display = 'block';
+            document.getElementById('additionalQuery1Container').innerHTML = `
+                <label for="titles">Titles:</label>
+                <input type="text" class="form-control" id="titles" name="titles" placeholder="For example: CEO, CTO, CFO, etc...">
+            `;
+            document.getElementById('additionalQuery2Container').innerHTML = ''; // Clear two fields if present
+        }
+
+        function toggleDoubleField() {
+            var additionalFields = document.getElementById('additionalFields');
+            additionalFields.style.display = 'block';
+            document.getElementById('additionalQuery1Container').innerHTML = '';
+            document.getElementById('additionalQuery2Container').innerHTML = `
+                <div class="col">
+                    <label for="seniority">Enter Seniority:</label>
+                    <input type="text" class="form-control" id="seniority" name="seniority" placeholder="For example: Head, Director, VP">
+                </div>
+                <div class="col">
+                    <label for="function">Enter Function:</label>
+                    <input type="text" class="form-control" id="function" name="function" placeholder="For example: Marketing, Engineering, Sales">
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
