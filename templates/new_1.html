@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Aidetic - AI SDR</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+    
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/templatemo-scholar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animate.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">    
+<!--
+
+TemplateMo 586 Scholar
+
+https://templatemo.com/tm-586-scholar
+
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leads Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background-color: #8a2be2;
+            padding: 15px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .navbar input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        .navbar input[type="text"]:focus {
+            outline: none;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 18px;
+        }
+
+        /* Table styling */
+        .table-container {
+            margin: 30px auto;
+            width: 90%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #8a2be2;
+            color: #ffffff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f4f4f4;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Pagination styling */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .pagination a {
+            color: #8a2be2;
+            padding: 8px 16px;
+            text-decoration: none;
+            margin: 0 4px;
+            border: 1px solid #8a2be2;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination a.active {
+            background-color: #8a2be2;
+            color: white;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        <style>
+            /* Custom styles */
+            body {
+                background-color: #f8f9fa; /* Light gray background */
+                color: #333;
+                padding: 10px;
+            }
+    
+            .navbar {
+                background-color: #6a5acd; /* Soft purple for navbar */
+            }
+    
+            .navbar-nav a {
+                color: white;
+                margin-right: 20px;
+            }
+    
+            .greeting {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+                font-weight: 600;
+                color: #495057;
+            }
+            
+            .lead-search {
+                background-color: #f1f3f5; /* Light gray for lead search section */
+                border-radius: 15px;
+                padding: 20px;
+                margin-bottom: 30px;
+                border: 1px solid #e2e6ea;
+            }
+    
+            .lead-search label {
+                font-weight: bold;
+                color: #495057;
+            }
+    
+            .lead-search input, .lead-search select, .lead-search button {
+                width: 100%;
+                margin-bottom: 10px;
+                border-radius: 5px;
+            }
+    
+            .lead-search .btn-primary {
+                background-color: #6a5acd;
+                border: none;
+            }
+    
+            .example-queries {
+                background-color: #e7f1ff; /* Very light blue for the example query section */
+                border-radius: 10px;
+                padding: 15px;
+                border: 1px solid #b6d4fe;
+            }
+    
+            .example-queries a {
+                color: #0056b3;
+                text-decoration: none;
+            }
+    
+            .example-queries a:hover {
+                color: #003d7e;
+                text-decoration: underline;
+            }
+    
+            .recent-activity {
+                background-color: #f1f3f5;
+                border-radius: 15px;
+                padding: 20px;
+                border: 1px solid #e2e6ea;
+            }
+    
+            .recent-activity .card {
+                background-color: #e7f1ff;
+                border: 1px solid #b6d4fe;
+                border-radius: 10px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+    
+            .footer {
+                text-align: center;
+                padding: 20px;
+                margin-top: 30px;
+                font-size: 0.9rem;
+                color: #777;
+            }
+
+            .container_1 {
+                background-color: #fff; /* White container background */
+                border-radius: 10px;
+                padding: 30px;
+                margin-top: 50px;
+                margin-left: 50px;
+                margin-right: 50px
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            }
+    
+    
+        .btn-custom {
+            background-color: #6a5acd !important; /* Button background color */
+            color: white; /* Button text color */
+            width: 50%; /* Half-width for each button */
+        }
+    </style>
+
+  </head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="{{ url_for('index') }}" class="logo">
+                        <h1>AI SDR</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Search Start ***** -->
+                    <div class="search-input">
+                        <form id="search" action="#">
+                            <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+                            <i class="fa fa-search"></i>
+                        </form>
+                    </div>
+                    <!-- ***** Search End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="{{ url_for('dashboard.dashboard') }}" class="active">Dashboard</a></li>
+                        <li class="scroll-to-section"><a href="{{ url_for('cxo_finder.new_1') }}">CXO Finder</a></li>
+                        <li class="scroll-to-section"><a href="{{ url_for('view_leads.view_leads') }}">Leads</a></li>
+                        <li class="scroll-to-section"><a href="#about-us">Analytics</a></li>
+                        <li class="scroll-to-section"><a href="#contact">Accounts Setting</a></li>
+                        <li class="scroll-to-section"><a href="{{ url_for('login.login') }}">Log Out</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <div class="main-banner_1" id="top">
+
+  </div>
+  <div class="container_1">
+    <!-- Welcome Message -->
+    <div class="greeting">Welcome, Atif!</div>
+
+    <!-- Lead Search Tool -->
+    <div class="lead-search">
+        <h3>Find New Leads</h3>
+        <form method="POST" action="/submit_cxo" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="query">Query:</label>
+                <input type="text" class="form-control" id="query" name="query" required placeholder="Type your query">
+            </div>
+
+            <p class="font-weight-bold">Example queries:</p>
+            <div class="example-queries">
+                <p><a href="#" onclick="fillQuery('Give me CLM and legaltech companies in USA with employees between 50 & 500')">Give me CLM and legaltech companies in USA with employees between 50 & 500.</a></p>
+                <p><a href="#" onclick="fillQuery('Give me influencer marketing companies in Canada and USA with employees less than 200')">Give me influencer marketing companies in Canada and USA with employees less than 200.</a></p>
+                <p><a href="#" onclick="fillQuery('Give me real estate companies in USA with employees in the range of 50-200')">Give me real estate companies in USA with employees in the range of 50-200.</a></p>
+            </div>
+
+            <!-- Designations Section -->
+            <div class="mt-4">
+                <p><strong>Designations:</strong></p>
+         <div class="btn-group w-100" role="group">
+         <button type="button" class="btn btn-secondary btn-custom" onclick="toggleSingleField()">Titles</button>
+         <button type="button" class="btn btn-secondary btn-custom" onclick="toggleDoubleField()">Seniority & Function</button>
+         </div>
+
+
+                <!-- Additional Fields (hidden by default) -->
+                <div class="form-group mt-3" id="additionalFields" style="display: none;">
+                    <!-- Single additional field -->
+                    <div id="additionalQuery1Container"></div>
+                    <!-- Two additional fields -->
+                    <div class="row" id="additionalQuery2Container"></div>
+                </div>
+            </div>
+
+            <div class="form-group mt-4">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </form>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="recent-activity">
+        <h3>Recent Activity</h3>
+        <div class="card">
+            <p>Lead 1: Reached out to XYZ Inc. - Awaiting Response</p>
+        </div>
+        <div class="card">
+            <p>Lead 2: Follow-up with ABC Corp.</p>
+        </div>
+    </div>
+  </div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2024 AI SDR. All Rights Reserved.</p>
+</div>
+
+<!-- Include Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<script>
+    function fillQuery(text) {
+        document.getElementById('query').value = text;
+    }
+
+    function toggleSingleField() {
+        document.getElementById('additionalFields').style.display = 'block';
+        document.getElementById('additionalQuery1Container').innerHTML = `
+            <label for="titles">Titles:</label>
+            <input type="text" class="form-control" id="titles" name="titles" placeholder="For example: CEO, CTO, CFO, etc...">
+        `;
+        document.getElementById('additionalQuery2Container').innerHTML = ''; // Clear two fields if present
+    }
+
+    function toggleDoubleField() {
+        document.getElementById('additionalFields').style.display = 'block';
+        document.getElementById('additionalQuery1Container').innerHTML = '';
+        document.getElementById('additionalQuery2Container').innerHTML = `
+            <div class="col">
+                <label for="seniority">Enter Seniority:</label>
+                <input type="text" class="form-control" id="seniority" name="seniority" placeholder="For example: Head, Director, VP">
+            </div>
+            <div class="col">
+                <label for="function">Enter Function:</label>
+                <input type="text" class="form-control" id="function" name="function" placeholder="For example: Marketing, Engineering, Sales">
+            </div>
+        `;
+    }
+</script>
+</body>
+</html>
+
+
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/isotope.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/owl-carousel.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/counter.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/app.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+
+  </body>
+</html>

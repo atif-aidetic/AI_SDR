@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Aidetic - AI SDR</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+    
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/templatemo-scholar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animate.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">    
+<!--
+
+TemplateMo 586 Scholar
+
+https://templatemo.com/tm-586-scholar
+
+-->
+  </head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="{{ url_for('index') }}" class="logo">
+                        <h1>AI SDR</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Serach Start ***** -->
+                    <div class="search-input">
+                      <form id="search" action="#">
+                        <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+                        <i class="fa fa-search"></i>
+                      </form>
+                    </div>
+                    <!-- ***** Serach Start ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                        <li class="scroll-to-section"><a href="#services">Services</a></li>
+                        <li class="scroll-to-section"><a href="#about-us">About Us</a></li>
+                        <li class="scroll-to-section"><a href="#contact">Contact Us</a></li>
+                        <li class="scroll-to-section"><a href="{{ url_for('login.login') }}">login</a></li>
+                      </ul>                       
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <div class="main-banner" id="top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="owl-carousel owl-banner">
+            <div class="item item-1">
+              <div class="header-text">
+                  <span class="category">AI SDR Solutions</span>
+                  <h2>Transform Your Sales Strategy with AI-Powered SDR</h2>
+                  <p>Our AI-driven Sales Development Representative services streamline lead generation and outreach, optimizing your sales funnel and increasing efficiency. Powered by the latest AI technologies, our solutions are designed to deliver results.</p>
+                  <div class="buttons">
+                      <div class="main-button">
+                          <a href="#">Request a Demo</a>
+                      </div>
+                      <div class="icon-button">
+                          <a href="#"><i class="fa fa-play"></i> Learn More About AI SDR</a>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          
+            <div class="item item-2">
+              <div class="header-text">
+                  <span class="category">Maximize Efficiency</span>
+                  <h2>Boost Your Sales Efficiency with AI Integration</h2>
+                  <p>Our AI SDR services are designed to enhance your sales performance, automating lead engagement and follow-ups. Experience significant improvements in productivity and conversion rates with our advanced AI solutions.</p>
+                  <div class="buttons">
+                      <div class="main-button">
+                          <a href="#">Request a Demo</a>
+                      </div>
+                      <div class="icon-button">
+                          <a href="#"><i class="fa fa-play"></i> Discover How AI Can Help</a>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          
+            <div class="item item-3">
+              <div class="header-text">
+                  <span class="category">Automated Outreach</span>
+                  <h2>Enhance Your Lead Generation with Automated Solutions</h2>
+                  <p>Leverage our AI SDR tools to automate your outreach and follow-ups, ensuring that no lead is left unattended. Our technology adapts to your needs, providing tailored solutions for maximum impact and engagement.</p>
+                  <div class="buttons">
+                      <div class="main-button">
+                          <a href="#">Request a Demo</a>
+                      </div>
+                      <div class="icon-button">
+                          <a href="#"><i class="fa fa-play"></i> Explore Our Automated Solutions</a>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="services section" id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item">
+                    <div class="icon">
+                        <img src="{{ url_for('static', filename='assets/images/service-01.png') }}" alt="CXO Finder">
+                    </div>
+                    <div class="main-content">
+                        <h4>CXO Finder</h4>
+                        <p>Generate high-quality leads with our CXO Finder service. Target key decision-makers and enhance your outreach efforts with precision.</p>
+                        <div class="main-button">
+                            <a href="#">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item">
+                    <div class="icon">
+                        <img src="{{ url_for('static', filename='assets/images/service-02.png') }}" alt="AI Research">
+
+                    </div>
+                    <div class="main-content">
+                        <h4>AI Research</h4>
+                        <p>Utilize advanced AI research techniques including Google search, LinkedIn post analysis, and company news monitoring to stay ahead in your industry.</p>
+                        <div class="main-button">
+                            <a href="#">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item">
+                    <div class="icon">
+                        <img src="{{ url_for('static', filename='assets/images/service-03.png') }}" alt="Personalized Mail Generation">
+                    </div>
+                    <div class="main-content">
+                        <h4>Personalized Mail Generation</h4>
+                        <p>Leverage our LLM model to automatically generate personalized emails that resonate with your prospects and drive engagement.</p>
+                        <div class="main-button">
+                            <a href="#">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+  <div class="section about-us" id="about-us">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-1">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                How Can AI SDR Transform Your Sales?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Our AI SDR solutions leverage cutting-edge technology to streamline lead generation, automate outreach, and enhance sales processes. <strong>Discover how AI can revolutionize your sales strategy</strong> and drive significant growth.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                How Does Our AI SDR Work?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Our AI SDR services integrate with your existing systems to automate lead discovery, perform advanced research, and generate personalized outreach. <strong>Learn more about our process</strong> and how it can be customized to fit your needs.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Why Choose Our AI SDR Services?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Our AI SDR solutions are designed to deliver measurable results with enhanced efficiency and accuracy. <strong>See why our clients choose us</strong> for their sales development needs and how we outperform traditional methods.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                What Support Do We Offer?
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                We offer comprehensive support including setup, integration, and ongoing assistance. <code>Contact us for detailed information</code> on our support services and how we ensure a smooth experience with our AI SDR solutions.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 align-self-center">
+                <div class="section-heading">
+                    <h6>About Us</h6>
+                    <h2>Why Our AI SDR Solutions Stand Out</h2>
+                    <p>At the forefront of AI technology, our SDR services are designed to optimize every aspect of your sales process. <strong>Explore how our innovative solutions</strong> can provide unmatched efficiency and effectiveness in lead generation and outreach.</p>
+                    <div class="main-button">
+                        <a href="#">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="contact-us section" id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 align-self-center">
+                <div class="section-heading">
+                    <h6>Contact Us</h6>
+                    <h2>Get in Touch with Our Team</h2>
+                    <p>We value your interest in our AI SDR services. Whether you have questions or need assistance, our team is here to help you with all your sales development needs. Reach out to us and we’ll get back to you as soon as possible.</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="contact-us-content">
+                    <form id="contact-form" action="" method="post">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <input type="text" name="name" id="name" placeholder="Your Name..." autocomplete="on" required>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <input type="email" name="email" id="email" placeholder="Your E-mail..." required>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <textarea name="message" id="message" placeholder="Your Message"></textarea>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <button type="submit" id="form-submit" class="orange-button">Send Message</button>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/isotope.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/owl-carousel.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/counter.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/app.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+
+  </body>
+</html>
