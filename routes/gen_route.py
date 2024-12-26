@@ -1,5 +1,5 @@
 import requests
-from flask import Blueprint, render_template
+from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
 
 from models import CompanyInfo, db
@@ -23,31 +23,118 @@ def dashboard():
     return render_template('dashboard.html')
 
 
+## API for leads
 view_leads_bp = Blueprint('view_leads', __name__)
 
 @view_leads_bp.route('/leads', methods=["GET"])
-@login_required
 def view_leads():
     try:
-        # Query all data from the company_info table
-        leads = CompanyInfo.query.all()
-        
-        # Convert SQLAlchemy objects to dictionaries for easier use in the template
-        leads_list = [
-            {
-                "id": lead.id,
-                "company_name": lead.company_name,
-                "company_domain": lead.company_domain,
-                "name": lead.name,
-                "linkedin_url": lead.linkedin_url,
-                "title": lead.title,
-                "email": lead.email,
-                "date_added": lead.date_added
-            }
-            for lead in leads
-        ]
-    except Exception as e:
-        print(f"Error fetching data from database: {e}")
-        leads_list = []
+        campaign_name = request.args.get('campaign_name', None)
 
-    return render_template("leads.html", leads=leads_list)
+        if campaign_name:
+            company_info = CompanyInfo.query.filter_by(campaign_name=campaign_name).all()
+        else:
+            return jsonify({"error": "Missing campaign_name parameter"}), 400
+
+        # Prepare the result
+        result = [
+            {
+                "company_name": company.campaign_name,
+                "company_domain": company.company_domain,
+                "name": company.name,
+                "linkedin_url": company.linkedin_url,
+                "title": company.title,
+                "email": company.email,
+                "date_added": company.date_added
+            }
+            for company in company_info
+        ]
+
+        return jsonify(result), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@view_leads_bp.route('/leads', methods=["POST"])
+def add_lead():
+    try:
+        # Get the JSON data from the request
+        data = request.get_json()
+
+        # Validate required fields
+        required_fields = ["campaign_name", "company_name", "company_domain", "name", "linkedin_url", "title", "email", "date_added"]
+        for field in required_fields:
+            if field not in data:
+                return jsonify({"error": f"Missing required field: {field}"}), 400
+
+        # Create a new CompanyInfo instance
+        new_lead = CompanyInfo(
+            campaign_name=data["campaign_name"],
+            company_name=data["company_name"],
+            company_domain=data["company_domain"],
+            name=data["name"],
+            linkedin_url=data["linkedin_url"],
+            title=data["title"],
+            email=data["email"],
+            date_added=data["date_added"]  # Ensure this is in the correct format
+        )
+
+        # Add and commit the new lead to the database
+        db.session.add(new_lead)
+        db.session.commit()
+
+        return jsonify({"message": "Lead added successfully", "lead_id": new_lead.id}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@view_leads_bp.route('/leads/<int:lead_id>', methods=["PUT"])
+def update_lead(lead_id):
+    try:
+        # Get the JSON data from the request
+        data = request.get_json()
+
+        # Query the lead to be updated
+        lead = CompanyInfo.query.get(lead_id)
+        if not lead:
+            return jsonify({"error": f"Lead with ID {lead_id} not found"}), 404
+
+        # Update fields if provided in the request
+        if "campaign_name" in data:
+            lead.campaign_name = data["campaign_name"]
+        if "company_domain" in data:
+            lead.company_domain = data["company_domain"]
+        if "name" in data:
+            lead.name = data["name"]
+        if "linkedin_url" in data:
+            lead.linkedin_url = data["linkedin_url"]
+        if "title" in data:
+            lead.title = data["title"]
+        if "email" in data:
+            lead.email = data["email"]
+        if "date_added" in data:
+            lead.date_added = data["date_added"]
+
+        # Commit the changes to the database
+        db.session.commit()
+
+        return jsonify({"message": f"Lead with ID {lead_id} updated successfully"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@view_leads_bp.route('/leads/<int:lead_id>', methods=["DELETE"])
+def delete_lead(lead_id):
+    try:
+        # Query the lead to be deleted
+        lead = CompanyInfo.query.get(lead_id)
+        if not lead:
+            return jsonify({"error": f"Lead with ID {lead_id} not found"}), 404
+
+        # Delete the lead
+        db.session.delete(lead)
+        db.session.commit()
+
+        return jsonify({"message": f"Lead with ID {lead_id} deleted successfully"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

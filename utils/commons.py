@@ -81,6 +81,7 @@ def getting_cxo_result(content):
     }
 
     org_response = fetch_organizations(task_org)
+    print("the org response is -----------------_>",org_response)
     
     total_orgs = org_response.get("pagination", {}).get("total_entries", 0)
     total_pages = org_response.get("pagination", {}).get("total_pages", 1)
@@ -114,7 +115,7 @@ def getting_cxo_result(content):
 
     ## changes to be done here
     lead_response = fetch_leads(task_lead)
-
+    print("the readresponse is------------->",lead_response)
     total_leads = lead_response.get("pagination", {}).get("total_entries", 0)
     total_lead_pages = lead_response.get("pagination", {}).get("total_pages", 1)
 
@@ -144,5 +145,7 @@ def getting_cxo_result(content):
             'title': i.get('title', 'N/A'),
             'email': email
         })
+        
+    print("the extracted details are----------------_>", extracted_details)
         
     return extracted_details

@@ -52,6 +52,7 @@ class Lead(db.Model):
 class CompanyInfo(db.Model):
     __tablename__ = 'company_info'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    campaign_name = db.Column(db.String(255), nullable=True, default=None)
     company_name = db.Column(db.String(255), nullable=True, default=None)
     company_domain = db.Column(db.String(255), nullable=True, default=None)
     name = db.Column(db.String(255), nullable=True, default=None)

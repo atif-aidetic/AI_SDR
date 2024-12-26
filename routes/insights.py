@@ -1,5 +1,5 @@
 import requests
-from flask import Blueprint, render_template, request
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
 
 from open_ai import generate_cold_message_openai
@@ -13,64 +13,53 @@ insight_data_api_url = env.insight_data_api
 insights_bp = Blueprint('insights', __name__)
 
 
-@insights_bp.route('/insight/<company_name>', methods=['GET'])
-@login_required
-def insights(company_name):
-    print("The company domain:------------------>", company_name)
+@insights_bp.route('/insight', methods=['POST'])
+def insights():
+    # Extract data from the JSON body
+    data = request.get_json()
 
-    date_added = request.args.get('date_added')
-    company_domain = request.args.get('company_domain')
-    company_name = request.args.get('company_name')
-    linkedin_url = request.args.get('linkedin_url')
-    name = request.args.get('name')
-    title = request.args.get('title')
-    email = request.args.get('email')
+    company_domain = data.get('company_domain', "")
+    company_name = data.get('company_name', "")
+    linkedin_url = data.get('linkedin_url', "")
+    name = data.get('name', "")
+    title = data.get('title', "")
+    email = data.get('email', "")
 
-    if not company_name:
-        # If no leads are found, handle this case
-        return render_template(
-            "insights.html",
-            company_name=company_name,
-            email_history=[],
-            linked_message="",
-            chart=None,
-        )
+    if not company_name or not name:
+        return jsonify({"error": "company_name and name are required"}), 400
 
-    name = name
-    title = title
-    company_name = company_name
     email_history = []
 
-
+    # Generate LinkedIn message
     user_prompt_1 = f"write a linkedin message to {name} the {title} of {company_name}"
+    try:
+        linked_message = generate_cold_message_openai(user_prompt_1)
+    except Exception as e:
+        linked_message = None
+        print(f"Error generating LinkedIn message: {e}")
 
-    linked_message = generate_cold_message_openai(user_prompt_1)
-    print(linked_message)
+    # Example sentiment values (replace with real analysis if available)
+    try:
+        sentiment_data = {
+            "positive": 50,
+            "negative": 30,
+            "neutral": 20,
+        }
+    except Exception as e:
+        sentiment_data = {"positive": 0, "negative": 0, "neutral": 0}
+        print(f"Error generating sentiment data: {e}")
 
+    # Prepare the response as JSON
+    response = {
+        "company_name": company_name,
+        "company_domain": company_domain,
+        "linkedin_url": linkedin_url,
+        "name": name,
+        "title": title,
+        "email": email,
+        "email_history": email_history,
+        "linked_message": linked_message,
+        "sentiment_data": sentiment_data,  # Includes positive, negative, and neutral
+    }
 
-    # Example sentiment values
-    positive = 50
-    negative = 30
-    neutral = 20
-
-    chart = create_sentiment_plot(positive, negative, neutral)
-
-    return render_template(
-        "insights.html",
-        company_name=company_name,
-        email_history=email_history,
-        linked_message=linked_message,
-        chart=chart,
-    )
-
-    # except requests.exceptions.RequestException as e:
-    #     print(f"API request error: {e}")
-    #     # Handle the case where the API request fails
-    #     return render_template(
-    #         "insights.html",
-    #         company_domain=company_domain,
-    #         email_history=[],
-    #         linked_message="",
-    #         company_name="No data found",
-    #         chart=None,
-    #     )
+    return jsonify(response), 200

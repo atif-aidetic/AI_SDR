@@ -9,24 +9,29 @@ env = ENV()
 
 cxo_submit_bp = Blueprint('cxo_submit', __name__)
 
-@cxo_submit_bp.route("/submit_cxo", methods=["GET", "POST"])
-@login_required
-def new_1():
-    if request.method == "POST":
-        query = request.form.get('query')
-        email = request.form.get('email')
-        titles = request.form.get('titles', '')
-        seniority = request.form.get('seniority', '')
-        function = request.form.get('function', '')
+@cxo_submit_bp.route("/submit_cxo", methods=["POST"])
+def submit_cxo():
+    # Get JSON payload from the request
+    data = request.get_json()
+    print(data)
 
-        content_payload = {
-            "query": query,
-            "positions": titles,
-            "email": email
-        }
+    # Extracting fields from the JSON payload
+    query = data.get('query')
+    email = data.get('email')
+    titles = data.get('titles', '')
+    seniority = data.get('seniority', '')
+    function = data.get('function', '')
 
-        print("------------------>", content_payload)
+    # Prepare the content payload for fetching CXO results
+    content_payload = {
+        "query": query,
+        "positions": titles,
+        "email": email
+    }
 
+    print("Content Payload:", content_payload)
+
+    try:
         # Fetching CXO results
         response = getting_cxo_result(content_payload)
 
@@ -40,10 +45,15 @@ def new_1():
                 title=lead.get('title', 'N/A'),
                 email=lead.get('email', 'N/A')
             )
-            print('Company Info data is ------------------_>', new_company_info)
-            db.session.add(new_company_info)  # Add the new entry to the session
+            print('Ingesting:', new_company_info)
+            db.session.add(new_company_info)
 
         db.session.commit()  # Commit all changes to the database
-        return "CXO data submitted successfully", 200
+        
+        return {"status": "success", "message": "Data ingested successfully"}, 200
 
-    return render_template("submit_cxo.html")
+    except Exception as e:
+        # Handle any errors and roll back the session if necessary
+        db.session.rollback()
+        print("Error occurred:", str(e))
+        return {"status": "error", "message": "Failed to ingest data", "error": str(e)}, 500
