@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 from flask_jwt_extended import jwt_required
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
@@ -8,9 +8,10 @@ from routes.campaign_api import campaign_bp
 from routes.gen_route import cxo_finder_bp, dashboard_bp, view_leads_bp
 from routes.insights import insights_bp
 from routes.log_in import init_app_jwt, login_bp
+from routes.profile_setting import profile_bp
 from routes.research import research_bp
 from routes.submit_cxo import cxo_submit_bp
-from routes.profile_setting import profile_bp
+from utils.commons import token_required
 
 # from flask_restful import Resource, Api
 
@@ -33,9 +34,13 @@ def index():
 
 
 @app.route("/health", methods=["GET"])
-# @jwt_required()
-def health_check():
-    return jsonify({"status": "healthy", "message": "Connection established"}), 200
+@token_required
+def protected():
+    user = request.user  # Access user information from the token
+    return jsonify({
+        'message': 'This is a protected route',
+        'user': user
+    }), 200
 
 
 # Register blueprints for Login
@@ -69,6 +74,16 @@ app.register_blueprint(profile_bp)
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+# @login_bp.route("/protected", methods=["GET"])
+# @token_required
+# def protected():
+#     user = request.user  # Access user information from the token
+#     return jsonify({
+#         'message': 'This is a protected route',
+#         'user': user
+#     }), 200
+
 
 
 if __name__ == '__main__':

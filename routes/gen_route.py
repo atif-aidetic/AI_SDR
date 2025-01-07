@@ -1,6 +1,7 @@
 import requests
 from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required
+from utils.commons import token_required
 
 from models import CompanyInfo, db
 from settings import ENV
@@ -27,6 +28,7 @@ def dashboard():
 view_leads_bp = Blueprint('view_leads', __name__)
 
 @view_leads_bp.route('/leads', methods=["GET"])
+@token_required
 def view_leads():
     try:
         campaign_name = request.args.get('campaign_name', None)

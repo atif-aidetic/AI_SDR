@@ -1,6 +1,4 @@
-import requests
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
 
 from api.google_search import google_search_result
 from api.linkedin_activity import get_linkedin_post
@@ -27,7 +25,6 @@ def view_company_details():
     email = data.get('email', "")
     name = data.get('name', "")
     # Extract 'name' from the JSON body
-    print("The data is:", data)
 
     try:
         news_articles = get_news(company_name) if company_name else []

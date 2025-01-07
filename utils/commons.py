@@ -1,8 +1,11 @@
 import json
 import time
+from functools import wraps
 
+import jwt
 import pandas as pd
 import requests
+from flask import jsonify, request
 from openai import OpenAI
 
 from settings import env
@@ -149,3 +152,30 @@ def getting_cxo_result(content):
     print("the extracted details are----------------_>", extracted_details)
         
     return extracted_details
+
+
+SECRET_KEY = "your-secret-key"  # Replace with your actual secret key
+
+def generate_token(user):
+    payload = {
+        "user_id": str(user.id),
+    }
+    token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+    return token
+
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = request.headers.get("Authorization")
+        if not token:
+            return jsonify({'message': 'Token is missing!'}), 401
+        try:
+            # Decode the token
+            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+            request.user = payload  # Attach the payload to the request for use in the endpoint
+        except jwt.ExpiredSignatureError:
+            return jsonify({'message': 'Token has expired!'}), 401
+        except jwt.InvalidTokenError:
+            return jsonify({'message': 'Invalid token!'}), 401
+        return f(*args, **kwargs)
+    return decorated

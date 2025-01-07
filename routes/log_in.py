@@ -1,10 +1,9 @@
 from flask import Blueprint, jsonify, redirect, request, url_for
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required
 from flask_login import login_required, login_user, logout_user
-from werkzeug.security import \
-    check_password_hash  # For secure password comparison
 
 from models import User  # Import the User model
+from utils.commons import generate_token
 
 # Initialize JWTManager
 jwt = JWTManager()
@@ -31,7 +30,7 @@ def login():
     user = User.query.filter_by(username=username).first()
 
     if user and user.password == password:  # In production, use hashed passwords
-        access_token = create_access_token(identity=user.id)
+        access_token = generate_token(user)
         return jsonify({
             'success': True,
             'message': 'Login successfully',
@@ -51,3 +50,4 @@ logout_bp = Blueprint('logout', __name__)
 def logout():
     logout_user()
     return redirect(url_for("index"))
+
